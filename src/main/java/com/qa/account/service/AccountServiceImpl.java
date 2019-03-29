@@ -59,7 +59,7 @@ public class AccountServiceImpl implements AccountService{
 				.findFirst()
 				.orElse(new Account());
 		if (matchingAccs.getEmail() != null) {
-			return Constants.NOT_VALID_MESSAGE;
+			return Constants.ACCOUNT_EXISTS_MESSAGE;
 		}else return Constants.VALID_MESSAGE;
 	}
 	
