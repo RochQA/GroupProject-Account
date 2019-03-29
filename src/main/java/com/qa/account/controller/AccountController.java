@@ -48,7 +48,7 @@ public class AccountController {
 		return srvc.encryptPassword(password);
 	}	
 
-	public List<Account> getAllAccounts(){
+	private List<Account> getAllAccounts(){
 		return this.rest.build().exchange(client.getNextServerFromEureka(Constants.GATEWAY, false).getHomePageUrl()+Constants.GET_ACCOUNTS_PATH, 
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<Account>>(){}).getBody();
 	}
