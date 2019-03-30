@@ -18,7 +18,6 @@ import com.qa.account.entities.Account;
 import com.qa.account.entities.Constants;
 import com.qa.account.entities.CreateAccount;
 import com.qa.account.entities.Login;
-import com.qa.account.repository.AccountRepository;
 import com.qa.account.service.AccountServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -28,8 +27,7 @@ public class ServiceTests {
 	@InjectMocks
 	AccountServiceImpl srvc;
 	
-	@Mock
-	AccountRepository repo;
+	
 	
 	private String MOCK_STRING = "TEST";
 	private String MOCK_STRING2 = "roch@roch.roch";
