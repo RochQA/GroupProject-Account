@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -19,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -28,10 +28,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import org.springframework.http.MediaType;
+import com.google.gson.Gson;
 import com.netflix.discovery.EurekaClient;
 import com.qa.account.AccountApplication;
+import com.qa.account.controller.AccountController;
 import com.qa.account.entities.Account;
-import com.qa.account.entities.Constants;
+import com.qa.account.entities.Login;
+import com.qa.account.service.AccountServiceImpl;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
@@ -45,12 +49,25 @@ public class IntegrationTest {
 	private RestTemplateBuilder rest;
 	@Mock
 	private EurekaClient client;
+	@Mock
+	private AccountServiceImpl srvc;
+	@Mock
+	private AccountController control;
 
 	private List<Account> MOCK_LIST;
+	private Account MOCK_ACCOUNT;
+	private Login MOCK_LOGIN;
 	private MockMvc mockMvc;
+	private String MOCK_EMAIL = "gary@gary.gary";
+	private String MOCK_PASSWORD = "Password1";
+	
 	@Before
 	public void setup() throws Exception {
 	    this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+	    MOCK_ACCOUNT = new Account();
+	    MOCK_LOGIN = new Login();
+	    MOCK_LIST = new ArrayList();
+	    MOCK_LIST.add(MOCK_ACCOUNT);
 	}
 	
 	@Test
@@ -60,8 +77,7 @@ public class IntegrationTest {
 	    Assert.assertNotNull(servletContext);
 	    Assert.assertTrue(servletContext instanceof MockServletContext);
 	    Assert.assertNotNull(wac.getBean("accountController"));
-
-}
+	}
 	@Test
 	public void checkEncrypt() throws Exception {
 	    this.mockMvc.perform(put("/encrypt").contentType("application/x-www-form-urlencoded")
@@ -69,9 +85,12 @@ public class IntegrationTest {
 	}
 	@Test
 	public void checkLogin() throws Exception {
-		Mockito.when(rest.build().exchange(client.getNextServerFromEureka(Constants.GATEWAY, false).getHomePageUrl()+Constants.GET_ACCOUNTS_PATH, 
-				HttpMethod.GET, null, new ParameterizedTypeReference<List<Account>>(){}).getBody()).thenReturn(MOCK_LIST);
-	    this.mockMvc.perform(put("/login").contentType("application/x-www-form-urlencoded")
-	      .content("Hi")).andDo(print()).andExpect(status().isOk()).andDo(MockMvcResultHandlers.print());
+		Mockito.when(srvc.login(MOCK_LOGIN, MOCK_LIST)).thenReturn(MOCK_ACCOUNT);
+		Mockito.when(control.getAllAccounts()).thenReturn(MOCK_LIST);
+		Gson gson = new Gson();
+	    String json = gson.toJson(MOCK_LOGIN);
+
+	    this.mockMvc.perform(put("/login").content(json).contentType(MediaType.APPLICATION_JSON))
+	    		.andDo(print()).andExpect(status().isOk());
 	}
 }
