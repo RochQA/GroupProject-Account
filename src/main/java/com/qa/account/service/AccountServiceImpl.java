@@ -16,6 +16,7 @@ import com.qa.account.entities.Account;
 import com.qa.account.entities.Constants;
 import com.qa.account.entities.CreateAccount;
 import com.qa.account.entities.Login;
+import com.qa.account.entities.UpdateAccount;
 
 @Service
 public class AccountServiceImpl implements AccountService{
@@ -23,8 +24,9 @@ public class AccountServiceImpl implements AccountService{
     private Pattern emailPattern = Pattern
             .compile(Constants.EMAIL_CHARS);
 	
+    
 	@Override
-	public String checkCreateAccount(CreateAccount account) {
+	public String checkValid(CreateAccount account) {
 		String password = account.getPassword();
 		if (!isEmailValid(account.getEmail().toLowerCase())) {
 			account.setPassword(encryptPassword(account.getPassword()));			
@@ -80,6 +82,22 @@ public class AccountServiceImpl implements AccountService{
 	public Boolean isPasswordValid(String password) {
 		return  (!password.equals(password.toLowerCase()) && !password.equals(password.toUpperCase()) 
 				&& password.length() >= 8 && password.matches(Constants.PASSCHARS));
+	}
+	public String checkUpdateAccount(UpdateAccount account, Account oldAccount, List<Account> accounts) {
+		if(encryptPassword(account.getPassword()).equals(oldAccount.getPassword())) {
+			String checkValid = checkValid(account);
+			if(checkValid.equals("Valid")) {
+				accounts.remove(oldAccount);
+				return checkDuplicates(account, accounts);				
+			}return checkValid;
+		}return "Old password does not match!";
+	}
+	public String checkAccount(CreateAccount account, List<Account> allAccounts) {
+		String validRes = checkValid(account);
+		if( validRes.equals("Valid")) {
+			String dupeRes = checkDuplicates(account, allAccounts);
+			return dupeRes;
+		}else return validRes;
 	}
 
 }

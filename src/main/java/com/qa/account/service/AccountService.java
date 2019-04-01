@@ -8,7 +8,7 @@ import com.qa.account.entities.Login;
 
 public interface AccountService {
 	
-	public String checkCreateAccount(CreateAccount account);
+	public String checkValid(CreateAccount account);
 
 	public String checkDuplicates(CreateAccount account, List<Account> accounts);
 

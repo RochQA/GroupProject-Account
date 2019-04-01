@@ -8,7 +8,6 @@ import javax.persistence.Id;
 public class Account {
 	
 	@Id
-	@GeneratedValue
 	private Long id;
 
 	private String email;
@@ -19,8 +18,6 @@ public class Account {
 	
 	private String accountType;
 	
-
-
 	public Long getId() {
 		return id;
 	}
