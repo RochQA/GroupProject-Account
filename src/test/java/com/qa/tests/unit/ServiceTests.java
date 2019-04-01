@@ -112,28 +112,28 @@ public class ServiceTests {
 		assertEquals(false,srvc.isPasswordValid(MOCK_INVALID_PASS));
 	}
 	
-	@Test
-	public void checkCreateAccountTestValid() {
-		assertEquals(Constants.VALID_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
-	}
-	
-	@Test
-	public void checkCreateAccountTestInvalidEmail() {
-		MOCK_ACCOUNT2.setEmail(MOCK_INVALID_EMAIL);
-		assertEquals(Constants.INVALID_EMAIL_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
-	}
-	
-	@Test
-	public void checkCreateAccountTestInvalidPass() {
-		MOCK_ACCOUNT2.setPassword(MOCK_INVALID_PASS);
-		assertEquals(Constants.INVALID_PASSWORD_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
-	}
-	
-	@Test
-	public void checkCreateAccountTestInvalidConfirmPass() {
-		MOCK_ACCOUNT2.setConfirmPassword(MOCK_INVALID_PASS);
-		assertEquals(Constants.PASSWORDS_DONT_MATCH_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
-	}
+//	@Test
+//	public void checkCreateAccountTestValid() {
+//		assertEquals(Constants.VALID_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
+//	}
+//	
+//	@Test
+//	public void checkCreateAccountTestInvalidEmail() {
+//		MOCK_ACCOUNT2.setEmail(MOCK_INVALID_EMAIL);
+//		assertEquals(Constants.INVALID_EMAIL_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
+//	}
+//	
+//	@Test
+//	public void checkCreateAccountTestInvalidPass() {
+//		MOCK_ACCOUNT2.setPassword(MOCK_INVALID_PASS);
+//		assertEquals(Constants.INVALID_PASSWORD_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
+//	}
+//	
+//	@Test
+//	public void checkCreateAccountTestInvalidConfirmPass() {
+//		MOCK_ACCOUNT2.setConfirmPassword(MOCK_INVALID_PASS);
+//		assertEquals(Constants.PASSWORDS_DONT_MATCH_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
+//	}
 	
 	
 	
