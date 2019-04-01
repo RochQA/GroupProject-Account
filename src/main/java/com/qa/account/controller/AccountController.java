@@ -46,10 +46,7 @@ public class AccountController {
 	}
 	@PutMapping("/checkUpdateValid")
 	public String checkUpdateValid(@RequestBody UpdateAccount account) {
-		Account oldAccount = getAccount(account.getId());
-		return srvc.checkUpdateAccount(account, oldAccount, getAllAccounts());
-			
-		
+		return srvc.checkUpdateAccount(account, getAccount(account.getId()), getAllAccounts());	
 	}
 
 	@PutMapping("/encrypt")
@@ -64,7 +61,7 @@ public class AccountController {
 	
 	private Account getAccount(Long accountId) {
 		HttpEntity<Long> entity = new HttpEntity<>(accountId);
-		return this.rest.build().exchange(client.getNextServerFromEureka(Constants.GETTER, false).getHomePageUrl()+Constants.GET_ACCOUNT_PATH, 
+		return this.rest.build().exchange(client.getNextServerFromEureka(Constants.GATEWAY, false).getHomePageUrl()+Constants.GET_ACCOUNT_PATH, 
 				HttpMethod.PUT, entity, Account.class).getBody();
 	}
 

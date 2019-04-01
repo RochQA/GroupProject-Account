@@ -86,7 +86,7 @@ public class AccountServiceImpl implements AccountService{
 	public String checkUpdateAccount(UpdateAccount account, Account oldAccount, List<Account> accounts) {
 		if(encryptPassword(account.getOldPassword()).equals(oldAccount.getPassword())) {
 			String checkValid = checkValid(account);
-			if(checkValid.equals("Valid")) {
+			if(checkValid.equals(Constants.VALID_MESSAGE)) {
 				Account matchingAccs = accounts.stream()
 						.filter(acc -> oldAccount.getId().equals(acc.getId()))
 						.findFirst()
@@ -94,11 +94,11 @@ public class AccountServiceImpl implements AccountService{
 				accounts.remove(matchingAccs);
 				return checkDuplicates(account, accounts);				
 			}return checkValid;
-		}return "Old password does not match!";
+		}return Constants.INVALID_OLD_PASSWORD_MESSAGE;
 	}
 	public String checkAccount(CreateAccount account, List<Account> allAccounts) {
 		String validRes = checkValid(account);
-		if( validRes.equals("Valid")) {
+		if( validRes.equals(Constants.VALID_MESSAGE)) {
 			String dupeRes = checkDuplicates(account, allAccounts);
 			return dupeRes;
 		}else return validRes;
