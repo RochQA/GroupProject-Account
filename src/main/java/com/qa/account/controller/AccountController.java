@@ -36,11 +36,12 @@ public class AccountController {
 	
 	@PutMapping("/checkValid")
 	public String checkValid(@RequestBody CreateAccount account) {
-		return srvc.checkCreateAccount(account);
-	}
-	@PutMapping("/checkDuplicates")
-	public String checkDuplicates(@RequestBody CreateAccount account) {
-		return srvc.checkDuplicates(account, getAllAccounts());
+		String checkValid = srvc.checkCreateAccount(account);
+		if(checkValid.equals("Valid")) {
+			return srvc.checkDuplicates(account, getAllAccounts());
+			
+		}
+		return checkValid;
 	}
 
 	@PutMapping("/encrypt")
