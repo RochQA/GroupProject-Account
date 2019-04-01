@@ -65,7 +65,7 @@ public class AccountController {
 	private Account getAccount(Long accountId) {
 		HttpEntity<Long> entity = new HttpEntity<>(accountId);
 		return this.rest.build().exchange(client.getNextServerFromEureka(Constants.GETTER, false).getHomePageUrl()+Constants.GET_ACCOUNT_PATH, 
-				HttpMethod.GET, entity, Account.class).getBody();
+				HttpMethod.PUT, entity, Account.class).getBody();
 	}
 
 }

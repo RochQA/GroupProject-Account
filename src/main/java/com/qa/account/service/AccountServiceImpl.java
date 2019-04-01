@@ -84,10 +84,14 @@ public class AccountServiceImpl implements AccountService{
 				&& password.length() >= 8 && password.matches(Constants.PASSCHARS));
 	}
 	public String checkUpdateAccount(UpdateAccount account, Account oldAccount, List<Account> accounts) {
-		if(encryptPassword(account.getPassword()).equals(oldAccount.getPassword())) {
+		if(encryptPassword(account.getOldPassword()).equals(oldAccount.getPassword())) {
 			String checkValid = checkValid(account);
 			if(checkValid.equals("Valid")) {
-				accounts.remove(oldAccount);
+				Account matchingAccs = accounts.stream()
+						.filter(acc -> oldAccount.getId().equals(acc.getId()))
+						.findFirst()
+						.orElse(new Account());
+				accounts.remove(matchingAccs);
 				return checkDuplicates(account, accounts);				
 			}return checkValid;
 		}return "Old password does not match!";
