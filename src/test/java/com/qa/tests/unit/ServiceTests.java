@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.qa.tests.unit;
 
 import static org.junit.Assert.assertEquals;
 
@@ -68,14 +68,14 @@ public class ServiceTests {
 		acc1.setEmail(MOCK_STRING2);
 		acc1.setPassword(MOCK_PASS);
 		acc1.setTrainerId(1L);
-		acc1.setAccountType("Trainer");
+//		acc1.setAccountType("Trainer");
 		
 		Account acc2 = new Account();
 		acc2.setId(2L);
 		acc2.setEmail(MOCK_EMAIL2);
 		acc2.setPassword(MOCK_PASS);
 		acc2.setTrainerId(2L);
-		acc2.setAccountType("Trainer");
+//		acc2.setAccountType("Trainer");
 		
 		List<Account> accounts = new ArrayList<Account>();
 		accounts.add(acc1);
@@ -112,60 +112,5 @@ public class ServiceTests {
 		assertEquals(false,srvc.isPasswordValid(MOCK_INVALID_PASS));
 	}
 	
-	@Test
-	public void checkCreateAccountTestValid() {
-		assertEquals(Constants.VALID_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
-	}
-	
-	@Test
-	public void checkCreateAccountTestInvalidEmail() {
-		MOCK_ACCOUNT2.setEmail(MOCK_INVALID_EMAIL);
-		assertEquals(Constants.INVALID_EMAIL_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
-	}
-	
-	@Test
-	public void checkCreateAccountTestInvalidPass() {
-		MOCK_ACCOUNT2.setPassword(MOCK_INVALID_PASS);
-		assertEquals(Constants.INVALID_PASSWORD_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
-	}
-	
-	@Test
-	public void checkCreateAccountTestInvalidConfirmPass() {
-		MOCK_ACCOUNT2.setConfirmPassword(MOCK_INVALID_PASS);
-		assertEquals(Constants.PASSWORDS_DONT_MATCH_MESSAGE, srvc.checkCreateAccount(MOCK_ACCOUNT2));
-	}
-	
-	
-	
-	
-//	@Test
-//	public void createTest() {
-//		Mockito.when(repo.save(Mockito.any())).thenReturn(MOCK_ACCOUNT2);
-//		assertEquals("createAccount not functioning",srvc.createAccount(MOCK_ACCOUNT), null);
-//		System.out.println(MOCK_ACCOUNT2.getPassword()+ MOCK_ACCOUNT2.getEmail());
-//		assertEquals("createAccount not functioning",srvc.createAccount(MOCK_ACCOUNT2), MOCK_ACCOUNT2);
-//		
-//	}
-//	@Test
-//	public void getTests() {
-//		Mockito.when(repo.findAll()).thenReturn(MOCK_ACCOUNTS);
-//		assertEquals("getAllAccounts not functioning", srvc.getAllAccounts(), MOCK_ACCOUNTS);
-//		assertEquals("getAccount not functioning",srvc.getAccount(MOCK_LONG), MOCK_ACCOUNT);
-//	}
-//	@Test
-//	public void updateTest() {
-//		Mockito.when(repo.findAll()).thenReturn(MOCK_ACCOUNTS);
-//		assertEquals("updateAccount not functioning", srvc.updateAccount(MOCK_ACCOUNT).getId(), MOCK_ACCOUNT.getId());
-//	}
-//
-//	@Test
-//	public void deleteByIdAccountTest() {
-//		assertEquals("deleteAccount not functioning", "Account deleted", srvc.deleteAccount(MOCK_LONG));
-//	}
-//	@Test
-//	public void loginTest() {
-//		Mockito.when(repo.findAll()).thenReturn(MOCK_ACCOUNTS);
-//		assertEquals("updateAccount not functioning", srvc.login(MOCK_LOGIN).getId(), MOCK_ACCOUNT.getId());
-//	}
 
 }

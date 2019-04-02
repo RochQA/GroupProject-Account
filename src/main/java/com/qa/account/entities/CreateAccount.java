@@ -5,42 +5,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class CreateAccount {
-	
-	@Id
-	@GeneratedValue
-	private Long id;
-
-	private String email;
-	
-	private String password;
-	
+public class CreateAccount extends Account {
+		
 	private String confirmPassword;
 	
-	private String trainerName;
+	private String trainerFirstName;
 	
-	public Long getId() {
-		return id;
+	private String trainerLastName;
+	
+	public String getTrainerFirstName() {
+		return trainerFirstName;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setTrainerFirstName(String trainerFirstName) {
+		this.trainerFirstName = trainerFirstName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getTrainerLastName() {
+		return trainerLastName;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setTrainerLastName(String trainerLastName) {
+		this.trainerLastName = trainerLastName;
 	}
 
 	public String getConfirmPassword() {
@@ -51,13 +37,8 @@ public class CreateAccount {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public String getTrainerName() {
-		return trainerName;
-	}
 
-	public void setTrainerName(String trainerName) {
-		this.trainerName = trainerName;
-	}	
 	
 	
 }
+

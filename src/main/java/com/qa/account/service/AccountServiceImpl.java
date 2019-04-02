@@ -16,6 +16,7 @@ import com.qa.account.entities.Account;
 import com.qa.account.entities.Constants;
 import com.qa.account.entities.CreateAccount;
 import com.qa.account.entities.Login;
+import com.qa.account.entities.UpdateAccount;
 
 @Service
 public class AccountServiceImpl implements AccountService{
@@ -23,8 +24,9 @@ public class AccountServiceImpl implements AccountService{
     private Pattern emailPattern = Pattern
             .compile(Constants.EMAIL_CHARS);
 	
+    
 	@Override
-	public String checkCreateAccount(CreateAccount account) {
+	public String checkValid(CreateAccount account) {
 		String password = account.getPassword();
 		if (!isEmailValid(account.getEmail().toLowerCase())) {
 			account.setPassword(encryptPassword(account.getPassword()));			
@@ -79,7 +81,27 @@ public class AccountServiceImpl implements AccountService{
 	}
 	public Boolean isPasswordValid(String password) {
 		return  (!password.equals(password.toLowerCase()) && !password.equals(password.toUpperCase()) 
-				&& password.length() >= 8 && password.matches(Constants.PASSCHARS));
+				&& password.length() >= Constants.PASSLENGTH && password.matches(Constants.PASSCHARS));
+	}
+	public String checkUpdateAccount(UpdateAccount account, Account oldAccount, List<Account> accounts) {
+		if(encryptPassword(account.getOldPassword()).equals(oldAccount.getPassword())) {
+			String checkValid = checkValid(account);
+			if(checkValid.equals(Constants.VALID_MESSAGE)) {
+				Account matchingAccs = accounts.stream()
+						.filter(acc -> oldAccount.getId().equals(acc.getId()))
+						.findFirst()
+						.orElse(new Account());
+				accounts.remove(matchingAccs);
+				return checkDuplicates(account, accounts);				
+			}return checkValid;
+		}return Constants.INVALID_OLD_PASSWORD_MESSAGE;
+	}
+	public String checkAccount(CreateAccount account, List<Account> allAccounts) {
+		String validRes = checkValid(account);
+		if( validRes.equals(Constants.VALID_MESSAGE)) {
+			String dupeRes = checkDuplicates(account, allAccounts);
+			return dupeRes;
+		}else return validRes;
 	}
 
 }
