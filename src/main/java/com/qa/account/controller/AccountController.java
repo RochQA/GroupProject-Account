@@ -31,23 +31,23 @@ public class AccountController {
 		this.client = client;
 	}
 	
-	@PutMapping("/login")
+	@PutMapping(Constants.LOGIN)
 	public Account login(@RequestBody Login login) {
 		return srvc.login(login, getAllAccounts());
 	}
 	
-	@PutMapping("/checkValid")
+	@PutMapping(Constants.CHECK_VALID)
 	public String checkValid(@RequestBody CreateAccount account) {	
 		return srvc.checkAccount(account, getAllAccounts());
 			
 		
 	}
-	@PutMapping("/checkUpdateValid")
+	@PutMapping(Constants.CHECK_UPDATE_VALID)
 	public String checkUpdateValid(@RequestBody UpdateAccount account) {
 		return srvc.checkUpdateAccount(account, getAccount(account.getId()), getAllAccounts());	
 	}
 
-	@PutMapping("/encrypt")
+	@PutMapping(Constants.ENCRYPT)
 	public String encrypt(@RequestBody String password) {
 		return srvc.encryptPassword(password);
 	}	

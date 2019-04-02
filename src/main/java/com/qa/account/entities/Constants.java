@@ -21,6 +21,11 @@ public class Constants {
 	public static final String GET_ACCOUNT_PATH = "getAccount";
 	public static final String INVALID_OLD_PASSWORD_MESSAGE = "Old password is incorrect";
 	public static final int PASSLENGTH = 8;
+	public static final String LOGIN = "/login";
+	public static final String CHECK_VALID = "/checkValid";
+	public static final String CHECK_UPDATE_VALID = "/checkUpdateValid";
+	public static final String ENCRYPT = "/encrypt";
+	
 
 
 }
