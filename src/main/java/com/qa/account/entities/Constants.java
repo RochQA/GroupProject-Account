@@ -16,7 +16,7 @@ public class Constants {
 	public static final String PASSWORDS_DONT_MATCH_MESSAGE = "Passwords Do Not Match!";
 	public static final String VALID_MESSAGE = "Valid";
 	public static final String NOT_VALID_MESSAGE = "Not Valid";
-	public static final String ACCOUNT_EXISTS_MESSAGE = "Account already exists";
+	public static final String ACCOUNT_EXISTS_MESSAGE = "Account with this email already exists";
 	public static final String GETTER = "GETTER";
 	public static final String GET_ACCOUNT_PATH = "getAccount";
 	public static final String INVALID_OLD_PASSWORD_MESSAGE = "Old password is incorrect";
