@@ -20,6 +20,7 @@ public class Constants {
 	public static final String GETTER = "GETTER";
 	public static final String GET_ACCOUNT_PATH = "getAccount";
 	public static final String INVALID_OLD_PASSWORD_MESSAGE = "Old password is incorrect";
+	public static final int PASSLENGTH = 8;
 
 
 }

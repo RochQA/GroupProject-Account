@@ -81,7 +81,7 @@ public class AccountServiceImpl implements AccountService{
 	}
 	public Boolean isPasswordValid(String password) {
 		return  (!password.equals(password.toLowerCase()) && !password.equals(password.toUpperCase()) 
-				&& password.length() >= 8 && password.matches(Constants.PASSCHARS));
+				&& password.length() >= Constants.PASSLENGTH && password.matches(Constants.PASSCHARS));
 	}
 	public String checkUpdateAccount(UpdateAccount account, Account oldAccount, List<Account> accounts) {
 		if(encryptPassword(account.getOldPassword()).equals(oldAccount.getPassword())) {
