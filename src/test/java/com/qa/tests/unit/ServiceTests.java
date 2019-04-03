@@ -68,14 +68,14 @@ public class ServiceTests {
 		acc1.setEmail(MOCK_STRING2);
 		acc1.setPassword(MOCK_PASS);
 		acc1.setTrainerId(1L);
-//		acc1.setAccountType("Trainer");
+
 		
 		Account acc2 = new Account();
 		acc2.setId(2L);
 		acc2.setEmail(MOCK_EMAIL2);
 		acc2.setPassword(MOCK_PASS);
 		acc2.setTrainerId(2L);
-//		acc2.setAccountType("Trainer");
+
 		
 		List<Account> accounts = new ArrayList<Account>();
 		accounts.add(acc1);
@@ -85,12 +85,6 @@ public class ServiceTests {
 		login.setEmail(MOCK_STRING2);
 		login.setPassword(MOCK_PASS);
 	}
-	
-	@Test
-	public void loginValidTest() {
-		assertEquals(acc1, srvc.login(login, accounts));
-	}
-	
 	
 	@Test
 	public void isEmailValidTest() {
