@@ -32,8 +32,7 @@ public class AccountApplicationTests {
 	@Test
 	public void appTests() {
 		assertThat(app).isNotNull();
-		String[] args = new String[] {"random"};
-		app.main(args);
+
 	}
 
 }
